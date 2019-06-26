@@ -1,0 +1,60 @@
+{
+  "sc":{
+    "name":"TSPI",
+    "include":"tspi.h",
+    "uid":"TSPI_UID",
+    "rpc":"tspiRpc",
+    "ver":"TSPI_VER",
+    "loop":"",
+    "priv":[
+      {
+        "type":"d",
+        "device":{
+          "func":"TSPI_DEV"
+        }
+      }
+    ]
+  },
+  "module":{
+    "name":"tiny_spi",
+    "version":"1.0",
+    "className":"VidorSPI",
+    "instanceName":"SPI",
+    "description":"SPI",
+    "author":"",
+    "parameters":[
+      {"name":"BAUD_WIDTH", "def":"8"},
+      {"name":"BAUD_DIV", "def":"0"},
+      {"name":"SPI_MODE", "def":"0"}
+    ]
+  },
+  "interfaces":[
+    {
+      "name":"spi",
+      "type":"output",
+      "mates":["pins"],
+      "visibility":"1",
+      "signals": [
+        {"name":"MISO", "bits":"1", "direction":"input" , "fid":"TSPI_PIN_FNC_MISO"},
+        {"name":"MOSI", "bits":"1", "direction":"output", "fid":"TSPI_PIN_FNC_MOSI"},
+        {"name":"SCLK", "bits":"1", "direction":"output", "fid":"TSPI_PIN_FNC_CLK" },
+        {"name":"CS"  , "bits":"1", "direction":"output", "fid":"TSPI_PIN_FNC_SS"  }
+      ]
+    }
+  ],
+  "hw":[
+    {
+      "interface":"avalon_slave",
+      "name":"avalon_slave",
+      "parameters":[
+        {"signal":"address", "name":"SPAN", "value":"3"},
+        {"signal":"read_data", "name":"BIT_WIDTH", "value":"32"},
+        {"signal":"write_data", "name":"BIT_WIDTH", "value":"32"}
+      ]
+    },
+    {
+      "interface":"spi",
+      "name":"spi"
+    }
+  ]
+}
